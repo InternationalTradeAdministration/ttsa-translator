@@ -7,12 +7,13 @@ from io import BytesIO
 from azure.storage.blob.blockblobservice import BlockBlobService as bbs
 from openpyxl import load_workbook
 
+#Retrieve account specific environment variables
 conn_str = os.environ["AzureWebJobsStorage"]
 acct_name = re.search('AccountName=(.+?);', conn_str).group(1)
 acct_key = re.search('AccountKey=(.+?);', conn_str).group(1)
 container_name = os.environ["ContainerName"]
 
-
+#Handler that converts 
 def handler(workbook):
     workbook_name = workbook.name.rsplit("/")[2]
     match_group = re.search(r'[0-9]{4}', workbook.name)
